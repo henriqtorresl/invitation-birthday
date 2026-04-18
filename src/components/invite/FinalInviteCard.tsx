@@ -2,6 +2,9 @@ type FinalInviteCardProps = {
   onRestartQuiz: () => void;
 };
 
+const LAMIS_WHATSAPP_URL =
+  "https://wa.me/5561982917777?text=Oi%20Lamis!%20Quero%20confirmar%20presen%C3%A7a%20no%20seu%20anivers%C3%A1rio.";
+
 export function FinalInviteCard({ onRestartQuiz }: FinalInviteCardProps) {
   return (
     <section className="w-full overflow-hidden rounded-4xl border border-white/80 bg-gradient-to-br from-white via-rose-50 to-peach-100 p-6 shadow-soft sm:p-10">
@@ -32,6 +35,20 @@ export function FinalInviteCard({ onRestartQuiz }: FinalInviteCardProps) {
         A vibe é divertida, com brilho e muito carinho. Vai ser especial ter
         você comigo nesse dia.
       </p>
+
+      <div className="mt-4 rounded-2xl border border-rose-200 bg-white/75 p-4">
+        <p className="text-sm font-medium leading-6 text-berry-700">
+          Para confirmar, fale com a Lamis no WhatsApp.
+        </p>
+        <a
+          href={LAMIS_WHATSAPP_URL}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-3 inline-flex rounded-full bg-berry-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-berry-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-berry-500"
+        >
+          Confirmar no WhatsApp
+        </a>
+      </div>
 
       <button
         type="button"
