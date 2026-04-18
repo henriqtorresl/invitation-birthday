@@ -1,26 +1,54 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --mist: #fff8fb;
+  --peach-100: #ffe9df;
+  --rose-100: #fce4ef;
+  --ballet-pink: #f8d3e2;
+  --berry-50: #fdf2f8;
+  --berry-400: #d56aa2;
+  --berry-500: #b53b7b;
+  --berry-600: #90235f;
+  --berry-700: #6c1446;
+  --berry-900: #441031;
+  --berry-950: #2d0a20;
+  --sunset-peach: #f7b39c;
+  --shadow-soft: 0 12px 35px rgba(147, 64, 101, 0.15);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-nunito);
+  --font-display: var(--font-playfair);
+  --color-mist: var(--mist);
+  --color-peach-100: var(--peach-100);
+  --color-rose-100: var(--rose-100);
+  --color-ballet-pink: var(--ballet-pink);
+  --color-berry-50: var(--berry-50);
+  --color-berry-400: var(--berry-400);
+  --color-berry-500: var(--berry-500);
+  --color-berry-600: var(--berry-600);
+  --color-berry-700: var(--berry-700);
+  --color-berry-900: var(--berry-900);
+  --color-berry-950: var(--berry-950);
+  --color-sunset-peach: var(--sunset-peach);
+  --shadow-soft: var(--shadow-soft);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(120% 90% at 10% 10%, #fff 0%, rgba(255, 255, 255, 0) 60%),
+    radial-gradient(
+      120% 90% at 90% 20%,
+      #ffe8f2 0%,
+      rgba(255, 232, 242, 0) 58%
+    ),
+    linear-gradient(180deg, #fff7fb 0%, #fff3ee 100%);
+  color: var(--berry-950);
+  font-family: var(--font-nunito), sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-playfair), serif;
 }
