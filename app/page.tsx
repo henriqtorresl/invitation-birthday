@@ -103,10 +103,7 @@ export default function Home() {
       return;
     }
 
-    setFeedback({
-      status: "success",
-      message: "Acertou! Proxima pergunta liberada.",
-    });
+    setFeedback(defaultFeedback);
     setCurrentStep((previous) => previous + 1);
   };
 
