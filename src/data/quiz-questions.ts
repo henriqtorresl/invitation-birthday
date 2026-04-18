@@ -3,7 +3,7 @@ import { QuizQuestion } from "@/src/types/quiz";
 export const quizQuestions: QuizQuestion[] = [
   {
     id: "favorite-singer",
-    question: "Qual cantora pop ela ama de verdade?",
+    question: "Qual cantora pop a Lamis ama de verdade?",
     type: "single-choice",
     options: [
       { id: "manoel-gomes", label: "Manoel Gomes (Caneta Azul forever)" },
@@ -16,7 +16,7 @@ export const quizQuestions: QuizQuestion[] = [
   },
   {
     id: "birthday-age",
-    question: "Quantos anos ela esta fazendo?",
+    question: "Quantos anos a Lamis esta fazendo?",
     type: "single-choice",
     options: [
       { id: "18", label: "18 (com experiencia de influencer)" },
@@ -29,7 +29,7 @@ export const quizQuestions: QuizQuestion[] = [
   },
   {
     id: "personality",
-    question: "Complete: ela e engracada e...",
+    question: "Complete: a Lamis e engracada e...",
     type: "single-choice",
     options: [
       { id: "estilosa", label: "Estilosa (look impecavel sem esforco)" },
@@ -38,7 +38,7 @@ export const quizQuestions: QuizQuestion[] = [
     ],
     acceptedAnswers: ["estilosa"],
     hint: "Vale algo no clima fashion e confiante.",
-    funErrorMessage: "Resposta boa, mas ainda nao e a energia dela.",
+    funErrorMessage: "Resposta boa, mas ainda nao e a energia da Lamis.",
   },
   {
     id: "dress-code",
