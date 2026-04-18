@@ -1,11 +1,15 @@
 type FinalInviteCardProps = {
+  onDownloadInvite: () => void;
   onRestartQuiz: () => void;
 };
 
 const LAMIS_WHATSAPP_URL =
   "https://wa.me/5561982917777?text=Oi%20Lamis!%20Quero%20confirmar%20presen%C3%A7a%20no%20seu%20anivers%C3%A1rio.";
 
-export function FinalInviteCard({ onRestartQuiz }: FinalInviteCardProps) {
+export function FinalInviteCard({
+  onDownloadInvite,
+  onRestartQuiz,
+}: FinalInviteCardProps) {
   return (
     <section className="w-full overflow-hidden rounded-4xl border border-white/80 bg-gradient-to-br from-white via-rose-50 to-peach-100 p-6 shadow-soft sm:p-10">
       <p className="inline-flex rounded-full bg-white/90 px-4 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-berry-500">
@@ -25,16 +29,8 @@ export function FinalInviteCard({ onRestartQuiz }: FinalInviteCardProps) {
         <InviteInfo label="Data" value="02/05" />
         <InviteInfo label="Horário" value="17h" />
         <InviteInfo label="Local" value="Mané - Águas Claras Shopping" />
-        <InviteInfo
-          label="Confirmar até"
-          value="28/04"
-        />
+        <InviteInfo label="Confirmar até" value="28/04" />
       </div>
-
-      <p className="mt-6 rounded-2xl border border-rose-200 bg-white/75 p-4 text-sm leading-6 text-berry-700">
-        A vibe é divertida, com brilho e muito carinho. Vai ser especial ter
-        você comigo nesse dia.
-      </p>
 
       <div className="mt-4 rounded-2xl border border-rose-200 bg-white/75 p-4">
         <p className="text-sm font-medium leading-6 text-berry-700">
@@ -50,13 +46,22 @@ export function FinalInviteCard({ onRestartQuiz }: FinalInviteCardProps) {
         </a>
       </div>
 
-      <button
-        type="button"
-        onClick={onRestartQuiz}
-        className="mt-6 rounded-full border border-berry-300 bg-white/85 px-5 py-2.5 text-sm font-semibold text-berry-700 transition hover:border-berry-500 hover:text-berry-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-berry-500"
-      >
-        Voltar para o início
-      </button>
+      <div className="mt-6 flex flex-wrap gap-3">
+        <button
+          type="button"
+          onClick={onDownloadInvite}
+          className="rounded-full bg-berry-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-berry-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-berry-500"
+        >
+          Baixar convite
+        </button>
+        <button
+          type="button"
+          onClick={onRestartQuiz}
+          className="rounded-full border border-berry-300 bg-white/85 px-5 py-2.5 text-sm font-semibold text-berry-700 transition hover:border-berry-500 hover:text-berry-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-berry-500"
+        >
+          Voltar para o início
+        </button>
+      </div>
     </section>
   );
 }
