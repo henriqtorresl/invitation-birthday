@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { FinalInviteCard } from "@/src/components/invite/FinalInviteCard";
 import { OpeningScreen } from "@/src/components/invite/OpeningScreen";
 import { QuizStepper } from "@/src/components/invite/QuizStepper";
+import { SuccessSnackbar } from "@/src/components/invite/SuccessSnackbar";
 import { UnlockTransition } from "@/src/components/invite/UnlockTransition";
 import { quizQuestions } from "@/src/data/quiz-questions";
 import { isAnswerAccepted } from "@/src/lib/answer-validation";
@@ -26,6 +27,8 @@ export default function Home() {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [feedback, setFeedback] = useState<Feedback>(defaultFeedback);
+  const [snackbarVisible, setSnackbarVisible] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
   const currentQuestion = quizQuestions[currentStep];
   const currentAnswer = currentQuestion ? answers[currentQuestion.id] ?? "" : "";
@@ -43,10 +46,28 @@ export default function Home() {
     return () => clearTimeout(timeout);
   }, [stage]);
 
+  useEffect(() => {
+    if (!snackbarVisible) {
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      setSnackbarVisible(false);
+    }, 1400);
+
+    return () => clearTimeout(timeout);
+  }, [snackbarVisible]);
+
+  const showSuccessSnackbar = (message: string) => {
+    setSnackbarMessage(message);
+    setSnackbarVisible(true);
+  };
+
   const startQuiz = () => {
     setStage("quiz");
     setCurrentStep(0);
     setFeedback(defaultFeedback);
+    setSnackbarVisible(false);
   };
 
   const handleAnswerChange = (value: string) => {
@@ -104,7 +125,9 @@ export default function Home() {
     }
 
     setFeedback(defaultFeedback);
+    setSnackbarVisible(false);
     setCurrentStep((previous) => previous + 1);
+    showSuccessSnackbar("Acertou! Proxima pergunta liberada.");
   };
 
   const handleBack = () => {
@@ -114,6 +137,7 @@ export default function Home() {
 
     setCurrentStep((previous) => previous - 1);
     setFeedback(defaultFeedback);
+    setSnackbarVisible(false);
   };
 
   const restartFlow = () => {
@@ -121,6 +145,7 @@ export default function Home() {
     setCurrentStep(0);
     setAnswers({});
     setFeedback(defaultFeedback);
+    setSnackbarVisible(false);
   };
 
   return (
@@ -152,6 +177,11 @@ export default function Home() {
 
         {stage === "final" ? <FinalInviteCard onRestart={restartFlow} /> : null}
       </section>
+
+      <SuccessSnackbar
+        isVisible={snackbarVisible}
+        message={snackbarMessage}
+      />
     </main>
   );
 }
