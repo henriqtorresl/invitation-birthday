@@ -69,10 +69,10 @@ export default function Home() {
       return;
     }
 
-    if (!currentAnswer.trim()) {
+    if (!currentAnswer) {
       setFeedback({
         status: "error",
-        message: "Me conta sua resposta para continuar.",
+        message: "Escolhe uma opcao para continuar.",
       });
       return;
     }

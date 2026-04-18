@@ -10,7 +10,7 @@ export function FinalInviteCard({ onRestart }: FinalInviteCardProps) {
       </p>
 
       <h1 className="mt-5 text-4xl leading-tight text-berry-950 sm:text-5xl">
-        Vem celebrar os meus 22 anos comigo
+        Vem celebrar os meus 23 anos comigo
       </h1>
       <p className="mt-5 max-w-2xl text-base leading-7 text-berry-700 sm:text-lg">
         Quero voce comigo em uma noite leve, divertida e cheia de musica pop,
