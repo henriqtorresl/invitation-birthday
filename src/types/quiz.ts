@@ -1,9 +1,14 @@
+export type QuizOption = {
+  id: string;
+  label: string;
+};
+
 export type QuizQuestion = {
   id: string;
   question: string;
-  type: "text";
+  type: "single-choice";
+  options: QuizOption[];
   acceptedAnswers: string[];
-  placeholder?: string;
   hint?: string;
   funErrorMessage?: string;
 };
