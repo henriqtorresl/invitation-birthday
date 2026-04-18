@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { FinalInviteCard } from "@/src/components/invite/FinalInviteCard";
 import { OpeningScreen } from "@/src/components/invite/OpeningScreen";
@@ -29,6 +29,7 @@ export default function Home() {
   const [feedback, setFeedback] = useState<Feedback>(defaultFeedback);
   const [snackbarVisible, setSnackbarVisible] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
+  const inviteMusicRef = useRef<HTMLAudioElement | null>(null);
 
   const currentQuestion = quizQuestions[currentStep];
   const currentAnswer = currentQuestion ? answers[currentQuestion.id] ?? "" : "";
@@ -44,6 +45,37 @@ export default function Home() {
     }, 2300);
 
     return () => clearTimeout(timeout);
+  }, [stage]);
+
+  useEffect(() => {
+    const inviteMusic = new Audio("/audio/invite-theme.ogg");
+    inviteMusic.loop = true;
+    inviteMusic.volume = 0.45;
+    inviteMusicRef.current = inviteMusic;
+
+    return () => {
+      inviteMusic.pause();
+      inviteMusic.currentTime = 0;
+      inviteMusicRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    const inviteMusic = inviteMusicRef.current;
+
+    if (!inviteMusic) {
+      return;
+    }
+
+    if (stage === "final") {
+      void inviteMusic.play().catch(() => {
+        // Browser autoplay policy may block playback without prior user gesture.
+      });
+      return;
+    }
+
+    inviteMusic.pause();
+    inviteMusic.currentTime = 0;
   }, [stage]);
 
   useEffect(() => {
