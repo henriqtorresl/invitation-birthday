@@ -1,4 +1,8 @@
-export function FinalInviteCard() {
+type FinalInviteCardProps = {
+  onRestartQuiz: () => void;
+};
+
+export function FinalInviteCard({ onRestartQuiz }: FinalInviteCardProps) {
   return (
     <section className="w-full overflow-hidden rounded-4xl border border-white/80 bg-gradient-to-br from-white via-rose-50 to-peach-100 p-6 shadow-soft sm:p-10">
       <p className="inline-flex rounded-full bg-white/90 px-4 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-berry-500">
@@ -28,6 +32,14 @@ export function FinalInviteCard() {
         Confirmacao ate 20 de maio de 2026. Se quiser, traz um acessorio com
         brilho para combinar com a energia da noite.
       </p>
+
+      <button
+        type="button"
+        onClick={onRestartQuiz}
+        className="mt-6 rounded-full border border-berry-300 bg-white/85 px-5 py-2.5 text-sm font-semibold text-berry-700 transition hover:border-berry-500 hover:text-berry-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-berry-500"
+      >
+        Fazer quiz novamente
+      </button>
     </section>
   );
 }
