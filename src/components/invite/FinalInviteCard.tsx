@@ -38,7 +38,7 @@ export function FinalInviteCard({ onRestartQuiz }: FinalInviteCardProps) {
         onClick={onRestartQuiz}
         className="mt-6 rounded-full border border-berry-300 bg-white/85 px-5 py-2.5 text-sm font-semibold text-berry-700 transition hover:border-berry-500 hover:text-berry-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-berry-500"
       >
-        Fazer quiz novamente
+        Voltar para o início
       </button>
     </section>
   );

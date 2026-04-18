@@ -329,7 +329,7 @@ export default function Home() {
 
   const restartQuiz = () => {
     window.localStorage.removeItem(QUIZ_STORAGE_KEY);
-    setStage("quiz");
+    setStage("opening");
     setCurrentStep(0);
     setAnswers({});
     setFeedback(defaultFeedback);
