@@ -46,7 +46,7 @@ export function QuizStepper({
           onClick={onBack}
           className="mt-4 px-2 text-sm font-semibold text-berry-600 transition hover:text-berry-800"
         >
-          Voltar pergunta
+          Voltar pergunta anterior
         </button>
       ) : null}
     </section>

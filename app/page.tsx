@@ -277,7 +277,7 @@ export default function Home() {
       playErrorSound();
       setFeedback({
         status: "error",
-        message: "Escolhe uma opcao para continuar.",
+        message: "Escolha uma opção para continuar.",
       });
       return;
     }
@@ -293,7 +293,7 @@ export default function Home() {
         status: "error",
         message:
           currentQuestion.funErrorMessage ??
-          "Nao foi dessa vez. Tenta mais uma com confianca.",
+          "Não foi dessa vez. Tente mais uma com confiança.",
       });
       return;
     }
@@ -314,7 +314,7 @@ export default function Home() {
     setFeedback(defaultFeedback);
     setSnackbarVisible(false);
     setCurrentStep((previous) => previous + 1);
-    showSuccessSnackbar("Acertou! Proxima pergunta liberada.");
+    showSuccessSnackbar("Acertou! Próxima pergunta liberada.");
   };
 
   const handleBack = () => {
@@ -340,7 +340,7 @@ export default function Home() {
     <main className="relative mx-auto flex min-h-screen w-full max-w-4xl items-start px-4 py-10 sm:px-6 sm:py-14">
       <section className="relative z-10 w-full">
         <p className="mb-5 text-sm font-semibold uppercase tracking-[0.22em] text-berry-600">
-          aniversario especial
+          aniversário especial
         </p>
 
         {stage === "opening" ? <OpeningScreen onStart={startQuiz} /> : null}

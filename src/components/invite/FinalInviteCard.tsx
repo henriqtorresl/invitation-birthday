@@ -13,14 +13,14 @@ export function FinalInviteCard({ onRestartQuiz }: FinalInviteCardProps) {
         Vem celebrar os meus 23 anos comigo
       </h1>
       <p className="mt-5 max-w-2xl text-base leading-7 text-berry-700 sm:text-lg">
-        Quero voce comigo em uma noite leve, divertida e cheia de musica pop,
-        risadas e looks incriveis. Sua presenca vai deixar tudo ainda mais
+        Quero você comigo em uma noite leve, divertida e cheia de música pop,
+        risadas e looks incríveis. Sua presença vai deixar tudo ainda mais
         especial.
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        <InviteInfo label="Data" value="Sabado, 30 de maio de 2026" />
-        <InviteInfo label="Horario" value="19h30" />
+        <InviteInfo label="Data" value="Sábado, 30 de maio de 2026" />
+        <InviteInfo label="Horário" value="19h30" />
         <InviteInfo label="Local" value="Casa Aurora, Rua das Flores, 220" />
         <InviteInfo
           label="Dress code"
@@ -29,7 +29,7 @@ export function FinalInviteCard({ onRestartQuiz }: FinalInviteCardProps) {
       </div>
 
       <p className="mt-6 rounded-2xl border border-rose-200 bg-white/75 p-4 text-sm leading-6 text-berry-700">
-        Confirmacao ate 20 de maio de 2026. Se quiser, traz um acessorio com
+        Confirmação até 20 de maio de 2026. Se quiser, traz um acessório com
         brilho para combinar com a energia da noite.
       </p>
 

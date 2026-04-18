@@ -8,7 +8,7 @@ export function UnlockTransition() {
         Acertou tudo, lenda
       </h2>
       <p className="mx-auto mt-4 max-w-lg text-base leading-7 text-berry-700 sm:text-lg">
-        Preparando o convite mais fofo, divertido e especial para voce.
+        Preparando o convite mais fofo, divertido e especial para você.
       </p>
       <div className="mx-auto mt-8 flex w-40 items-center justify-center gap-3">
         <span className="h-3 w-3 animate-bounce rounded-full bg-berry-500 [animation-delay:-0.3s]" />

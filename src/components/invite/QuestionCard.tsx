@@ -41,7 +41,7 @@ export function QuestionCard({
       ) : null}
       <fieldset className="mt-6">
         <legend className="mb-2 block text-sm font-semibold text-berry-700">
-          Escolha uma opcao
+          Escolha uma opção
         </legend>
         <div className="grid gap-3">
           {question.options.map((option) => {

@@ -20,7 +20,7 @@ export function OpeningScreen({ onStart }: OpeningScreenProps) {
         onClick={onStart}
         className="mt-8 rounded-full bg-gradient-to-r from-berry-500 to-rose-400 px-7 py-3 text-sm font-semibold text-white shadow-soft transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-berry-500"
       >
-        Comecar desafio
+        Começar desafio
       </button>
     </section>
   );

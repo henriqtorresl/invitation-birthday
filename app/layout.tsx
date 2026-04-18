@@ -13,7 +13,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Convite de Aniversario",
+  title: "Lamis - Aniversário",
   description:
     "Um site-convite interativo com quiz especial para desbloquear a surpresa final.",
   icons: {
