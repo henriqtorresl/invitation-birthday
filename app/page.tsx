@@ -327,11 +327,17 @@ export default function Home() {
     setSnackbarVisible(false);
   };
 
+  const restartQuiz = () => {
+    window.localStorage.removeItem(QUIZ_STORAGE_KEY);
+    setStage("quiz");
+    setCurrentStep(0);
+    setAnswers({});
+    setFeedback(defaultFeedback);
+    setSnackbarVisible(false);
+  };
+
   return (
     <main className="relative mx-auto flex min-h-screen w-full max-w-4xl items-start px-4 py-10 sm:px-6 sm:py-14">
-      <div className="absolute -left-16 top-10 h-52 w-52 rounded-full bg-rose-100/60 blur-3xl" />
-      <div className="absolute -right-8 bottom-10 h-44 w-44 rounded-full bg-peach-100/80 blur-3xl" />
-
       <section className="relative z-10 w-full">
         <p className="mb-5 text-sm font-semibold uppercase tracking-[0.22em] text-berry-600">
           aniversario especial
@@ -354,7 +360,7 @@ export default function Home() {
 
         {stage === "unlocking" ? <UnlockTransition /> : null}
 
-        {stage === "final" ? <FinalInviteCard /> : null}
+        {stage === "final" ? <FinalInviteCard onRestartQuiz={restartQuiz} /> : null}
       </section>
 
       <SuccessSnackbar

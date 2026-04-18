@@ -16,6 +16,11 @@ export const metadata: Metadata = {
   title: "Convite de Aniversario",
   description:
     "Um site-convite interativo com quiz especial para desbloquear a surpresa final.",
+  icons: {
+    icon: "/favicon-lamis.svg",
+    shortcut: "/favicon-lamis.svg",
+    apple: "/favicon-lamis.svg",
+  },
 };
 
 export default function RootLayout({
