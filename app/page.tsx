@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { FinalInviteCard } from "@/src/components/invite/FinalInviteCard";
 import { OpeningScreen } from "@/src/components/invite/OpeningScreen";
@@ -99,18 +99,6 @@ export default function Home() {
   }, [answers, currentStep, hasLoadedPersistedState, stage]);
 
   useEffect(() => {
-    if (stage !== "unlocking") {
-      return;
-    }
-
-    const timeout = setTimeout(() => {
-      setStage("final");
-    }, 2300);
-
-    return () => clearTimeout(timeout);
-  }, [stage]);
-
-  useEffect(() => {
     const inviteMusic = new Audio("/audio/invite-theme.ogg");
     inviteMusic.loop = true;
     inviteMusic.volume = 0.45;
@@ -166,10 +154,33 @@ export default function Home() {
     return () => clearTimeout(timeout);
   }, [snackbarVisible]);
 
-  const showSuccessSnackbar = (message: string) => {
+  const showSuccessSnackbar = useCallback((message: string) => {
     setSnackbarMessage(message);
     setSnackbarVisible(true);
-  };
+  }, []);
+
+  const downloadInvitePdf = useCallback(() => {
+    const link = document.createElement("a");
+    link.href = "/invite-assets/convite-lamis.pdf";
+    link.download = "convite-lamis.pdf";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  }, []);
+
+  useEffect(() => {
+    if (stage !== "unlocking") {
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      downloadInvitePdf();
+      showSuccessSnackbar("Seu convite em PDF foi baixado.");
+      setStage("final");
+    }, 2300);
+
+    return () => clearTimeout(timeout);
+  }, [downloadInvitePdf, showSuccessSnackbar, stage]);
 
   const getUiAudioContext = () => {
     if (typeof window === "undefined") {
