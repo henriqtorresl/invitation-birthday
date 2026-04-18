@@ -19,18 +19,18 @@ export function FinalInviteCard({ onRestartQuiz }: FinalInviteCardProps) {
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        <InviteInfo label="Data" value="Sábado, 30 de maio de 2026" />
-        <InviteInfo label="Horário" value="19h30" />
-        <InviteInfo label="Local" value="Casa Aurora, Rua das Flores, 220" />
+        <InviteInfo label="Data" value="02/05" />
+        <InviteInfo label="Horário" value="17h" />
+        <InviteInfo label="Local" value="Mané - Águas Claras Shopping" />
         <InviteInfo
-          label="Dress code"
-          value="Pop elegante com toque feminino"
+          label="Confirmar até"
+          value="28/04"
         />
       </div>
 
       <p className="mt-6 rounded-2xl border border-rose-200 bg-white/75 p-4 text-sm leading-6 text-berry-700">
-        Confirmação até 20 de maio de 2026. Se quiser, traz um acessório com
-        brilho para combinar com a energia da noite.
+        A vibe é divertida, com brilho e muito carinho. Vai ser especial ter
+        você comigo nesse dia.
       </p>
 
       <button
