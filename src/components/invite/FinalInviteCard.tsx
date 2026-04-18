@@ -32,35 +32,34 @@ export function FinalInviteCard({
         <InviteInfo label="Confirmar até" value="28/04" />
       </div>
 
-      <div className="mt-4 rounded-2xl border border-rose-200 bg-white/75 p-4">
+      <div className="mt-6 rounded-2xl border border-rose-200 bg-white/75 p-4">
         <p className="text-sm font-medium leading-6 text-berry-700">
-          Para confirmar, fale com a Lamis no WhatsApp.
+          Para confirmar presença, fale com a Lamis no WhatsApp.
         </p>
-        <a
-          href={LAMIS_WHATSAPP_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-3 inline-flex rounded-full bg-berry-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-berry-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-berry-500"
-        >
-          Confirmar no WhatsApp
-        </a>
-      </div>
-
-      <div className="mt-6 flex flex-wrap gap-3">
-        <button
-          type="button"
-          onClick={onDownloadInvite}
-          className="rounded-full bg-berry-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-berry-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-berry-500"
-        >
-          Baixar convite
-        </button>
-        <button
-          type="button"
-          onClick={onRestartQuiz}
-          className="rounded-full border border-berry-300 bg-white/85 px-5 py-2.5 text-sm font-semibold text-berry-700 transition hover:border-berry-500 hover:text-berry-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-berry-500"
-        >
-          Voltar para o início
-        </button>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <a
+            href={LAMIS_WHATSAPP_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex rounded-full bg-berry-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-berry-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-berry-500"
+          >
+            Confirmar no WhatsApp
+          </a>
+          <button
+            type="button"
+            onClick={onDownloadInvite}
+            className="rounded-full border border-berry-300 bg-white/85 px-5 py-2.5 text-sm font-semibold text-berry-700 transition hover:border-berry-500 hover:text-berry-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-berry-500"
+          >
+            Baixar convite
+          </button>
+          <button
+            type="button"
+            onClick={onRestartQuiz}
+            className="rounded-full border border-berry-300 bg-white/85 px-5 py-2.5 text-sm font-semibold text-berry-700 transition hover:border-berry-500 hover:text-berry-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-berry-500"
+          >
+            Voltar para o início
+          </button>
+        </div>
       </div>
     </section>
   );
