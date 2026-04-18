@@ -30,63 +30,14 @@ const defaultFeedback: Feedback = {
 
 const QUIZ_STORAGE_KEY = "lamis-invite-progress-v1";
 
-const getInitialPersistedQuizState = (totalSteps: number): PersistedQuizState => {
-  const defaultState: PersistedQuizState = {
-    stage: "opening",
-    currentStep: 0,
-    answers: {},
-  };
-
-  if (typeof window === "undefined") {
-    return defaultState;
-  }
-
-  const savedState = window.localStorage.getItem(QUIZ_STORAGE_KEY);
-
-  if (!savedState) {
-    return defaultState;
-  }
-
-  try {
-    const parsedState = JSON.parse(savedState) as Partial<PersistedQuizState>;
-    const validStages: FlowStage[] = ["opening", "quiz", "unlocking", "final"];
-    const safeStage = validStages.includes(parsedState.stage as FlowStage)
-      ? (parsedState.stage as FlowStage)
-      : "opening";
-    const parsedStep =
-      typeof parsedState.currentStep === "number"
-        ? Math.floor(parsedState.currentStep)
-        : 0;
-    const maxStepIndex = Math.max(totalSteps - 1, 0);
-    const safeStep = Math.min(Math.max(parsedStep, 0), maxStepIndex);
-    const safeAnswers =
-      parsedState.answers && typeof parsedState.answers === "object"
-        ? parsedState.answers
-        : {};
-
-    return {
-      stage: safeStage,
-      currentStep: safeStage === "opening" ? 0 : safeStep,
-      answers: safeAnswers,
-    };
-  } catch {
-    window.localStorage.removeItem(QUIZ_STORAGE_KEY);
-    return defaultState;
-  }
-};
-
 export default function Home() {
-  const [initialPersistedState] = useState<PersistedQuizState>(() =>
-    getInitialPersistedQuizState(quizQuestions.length),
-  );
-  const [stage, setStage] = useState<FlowStage>(initialPersistedState.stage);
-  const [currentStep, setCurrentStep] = useState(initialPersistedState.currentStep);
-  const [answers, setAnswers] = useState<Record<string, string>>(
-    initialPersistedState.answers,
-  );
+  const [stage, setStage] = useState<FlowStage>("opening");
+  const [currentStep, setCurrentStep] = useState(0);
+  const [answers, setAnswers] = useState<Record<string, string>>({});
   const [feedback, setFeedback] = useState<Feedback>(defaultFeedback);
   const [snackbarVisible, setSnackbarVisible] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [hasLoadedPersistedState, setHasLoadedPersistedState] = useState(false);
   const inviteMusicRef = useRef<HTMLAudioElement | null>(null);
   const uiAudioContextRef = useRef<AudioContext | null>(null);
 
@@ -95,6 +46,49 @@ export default function Home() {
   const totalSteps = quizQuestions.length;
 
   useEffect(() => {
+    const timeout = setTimeout(() => {
+      const savedState = window.localStorage.getItem(QUIZ_STORAGE_KEY);
+
+      if (!savedState) {
+        setHasLoadedPersistedState(true);
+        return;
+      }
+
+      try {
+        const parsedState = JSON.parse(savedState) as Partial<PersistedQuizState>;
+        const validStages: FlowStage[] = ["opening", "quiz", "unlocking", "final"];
+        const safeStage = validStages.includes(parsedState.stage as FlowStage)
+          ? (parsedState.stage as FlowStage)
+          : "opening";
+        const parsedStep =
+          typeof parsedState.currentStep === "number"
+            ? Math.floor(parsedState.currentStep)
+            : 0;
+        const maxStepIndex = Math.max(totalSteps - 1, 0);
+        const safeStep = Math.min(Math.max(parsedStep, 0), maxStepIndex);
+        const safeAnswers =
+          parsedState.answers && typeof parsedState.answers === "object"
+            ? parsedState.answers
+            : {};
+
+        setStage(safeStage);
+        setCurrentStep(safeStage === "opening" ? 0 : safeStep);
+        setAnswers(safeAnswers);
+      } catch {
+        window.localStorage.removeItem(QUIZ_STORAGE_KEY);
+      } finally {
+        setHasLoadedPersistedState(true);
+      }
+    }, 0);
+
+    return () => clearTimeout(timeout);
+  }, [totalSteps]);
+
+  useEffect(() => {
+    if (!hasLoadedPersistedState) {
+      return;
+    }
+
     const persistedState: PersistedQuizState = {
       stage,
       currentStep,
@@ -102,7 +96,7 @@ export default function Home() {
     };
 
     window.localStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify(persistedState));
-  }, [answers, currentStep, stage]);
+  }, [answers, currentStep, hasLoadedPersistedState, stage]);
 
   useEffect(() => {
     if (stage !== "unlocking") {
