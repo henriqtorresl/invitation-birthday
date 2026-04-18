@@ -3,8 +3,8 @@ type FinalInviteCardProps = {
   onRestartQuiz: () => void;
 };
 
-const LAMIS_WHATSAPP_URL =
-  "https://wa.me/5561982917777?text=Oi%20Lamis!%20Quero%20confirmar%20presen%C3%A7a%20no%20seu%20anivers%C3%A1rio.";
+const wppMsg = "Oiee, passando aqui pra confirmar minha presença!!!";
+const LAMIS_WHATSAPP_URL = `https://wa.me/5561982917777?text=${encodeURIComponent(wppMsg)}`;
 
 export function FinalInviteCard({
   onDownloadInvite,
