@@ -43,7 +43,9 @@ export default function Home() {
   const uiAudioContextRef = useRef<AudioContext | null>(null);
 
   const currentQuestion = quizQuestions[currentStep];
-  const currentAnswer = currentQuestion ? answers[currentQuestion.id] ?? "" : "";
+  const currentAnswer = currentQuestion
+    ? (answers[currentQuestion.id] ?? "")
+    : "";
   const totalSteps = quizQuestions.length;
 
   useEffect(() => {
@@ -56,8 +58,15 @@ export default function Home() {
       }
 
       try {
-        const parsedState = JSON.parse(savedState) as Partial<PersistedQuizState>;
-        const validStages: FlowStage[] = ["opening", "quiz", "unlocking", "final"];
+        const parsedState = JSON.parse(
+          savedState,
+        ) as Partial<PersistedQuizState>;
+        const validStages: FlowStage[] = [
+          "opening",
+          "quiz",
+          "unlocking",
+          "final",
+        ];
         const safeStage = validStages.includes(parsedState.stage as FlowStage)
           ? (parsedState.stage as FlowStage)
           : "opening";
@@ -96,7 +105,10 @@ export default function Home() {
       answers,
     };
 
-    window.localStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify(persistedState));
+    window.localStorage.setItem(
+      QUIZ_STORAGE_KEY,
+      JSON.stringify(persistedState),
+    );
   }, [answers, currentStep, hasLoadedPersistedState, stage]);
 
   useEffect(() => {
@@ -175,13 +187,16 @@ export default function Home() {
     }
 
     const timeout = setTimeout(() => {
-      downloadInvitePdf();
-      showSuccessSnackbar("Seu convite em PDF foi baixado.");
       setStage("final");
     }, 2300);
 
     return () => clearTimeout(timeout);
-  }, [downloadInvitePdf, showSuccessSnackbar, stage]);
+  }, [stage]);
+
+  const handleDownloadInvite = () => {
+    downloadInvitePdf();
+    showSuccessSnackbar("Download do convite iniciado.");
+  };
 
   const getUiAudioContext = () => {
     if (typeof window === "undefined") {
@@ -246,15 +261,39 @@ export default function Home() {
 
   const playSuccessSound = () => {
     playUiTones([
-      { frequency: 659.25, duration: 0.11, offset: 0, type: "sine", gain: 0.08 },
-      { frequency: 830.61, duration: 0.14, offset: 0.1, type: "triangle", gain: 0.1 },
+      {
+        frequency: 659.25,
+        duration: 0.11,
+        offset: 0,
+        type: "sine",
+        gain: 0.08,
+      },
+      {
+        frequency: 830.61,
+        duration: 0.14,
+        offset: 0.1,
+        type: "triangle",
+        gain: 0.1,
+      },
     ]);
   };
 
   const playErrorSound = () => {
     playUiTones([
-      { frequency: 320, duration: 0.13, offset: 0, type: "sawtooth", gain: 0.06 },
-      { frequency: 220, duration: 0.17, offset: 0.1, type: "sawtooth", gain: 0.07 },
+      {
+        frequency: 320,
+        duration: 0.13,
+        offset: 0,
+        type: "sawtooth",
+        gain: 0.06,
+      },
+      {
+        frequency: 220,
+        duration: 0.17,
+        offset: 0.1,
+        type: "sawtooth",
+        gain: 0.07,
+      },
     ]);
   };
 
@@ -372,13 +411,15 @@ export default function Home() {
 
         {stage === "unlocking" ? <UnlockTransition /> : null}
 
-        {stage === "final" ? <FinalInviteCard onRestartQuiz={restartQuiz} /> : null}
+        {stage === "final" ? (
+          <FinalInviteCard
+            onDownloadInvite={handleDownloadInvite}
+            onRestartQuiz={restartQuiz}
+          />
+        ) : null}
       </section>
 
-      <SuccessSnackbar
-        isVisible={snackbarVisible}
-        message={snackbarMessage}
-      />
+      <SuccessSnackbar isVisible={snackbarVisible} message={snackbarMessage} />
     </main>
   );
 }
