@@ -30,6 +30,7 @@ export default function Home() {
   const [snackbarVisible, setSnackbarVisible] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const inviteMusicRef = useRef<HTMLAudioElement | null>(null);
+  const uiAudioContextRef = useRef<AudioContext | null>(null);
 
   const currentQuestion = quizQuestions[currentStep];
   const currentAnswer = currentQuestion ? answers[currentQuestion.id] ?? "" : "";
@@ -79,6 +80,19 @@ export default function Home() {
   }, [stage]);
 
   useEffect(() => {
+    return () => {
+      const uiAudioContext = uiAudioContextRef.current;
+
+      if (!uiAudioContext) {
+        return;
+      }
+
+      void uiAudioContext.close();
+      uiAudioContextRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
     if (!snackbarVisible) {
       return;
     }
@@ -93,6 +107,81 @@ export default function Home() {
   const showSuccessSnackbar = (message: string) => {
     setSnackbarMessage(message);
     setSnackbarVisible(true);
+  };
+
+  const getUiAudioContext = () => {
+    if (typeof window === "undefined") {
+      return null;
+    }
+
+    if (uiAudioContextRef.current) {
+      return uiAudioContextRef.current;
+    }
+
+    const BrowserAudioContext = window.AudioContext;
+
+    if (!BrowserAudioContext) {
+      return null;
+    }
+
+    uiAudioContextRef.current = new BrowserAudioContext();
+    return uiAudioContextRef.current;
+  };
+
+  const playUiTones = (
+    tones: Array<{
+      frequency: number;
+      duration: number;
+      offset: number;
+      type: OscillatorType;
+      gain: number;
+    }>,
+  ) => {
+    const uiAudioContext = getUiAudioContext();
+
+    if (!uiAudioContext) {
+      return;
+    }
+
+    if (uiAudioContext.state === "suspended") {
+      void uiAudioContext.resume();
+    }
+
+    const baseTime = uiAudioContext.currentTime + 0.01;
+
+    tones.forEach((tone) => {
+      const oscillator = uiAudioContext.createOscillator();
+      const gainNode = uiAudioContext.createGain();
+      const startTime = baseTime + tone.offset;
+      const endTime = startTime + tone.duration;
+
+      oscillator.type = tone.type;
+      oscillator.frequency.setValueAtTime(tone.frequency, startTime);
+
+      gainNode.gain.setValueAtTime(0.0001, startTime);
+      gainNode.gain.exponentialRampToValueAtTime(tone.gain, startTime + 0.015);
+      gainNode.gain.exponentialRampToValueAtTime(0.0001, endTime);
+
+      oscillator.connect(gainNode);
+      gainNode.connect(uiAudioContext.destination);
+
+      oscillator.start(startTime);
+      oscillator.stop(endTime);
+    });
+  };
+
+  const playSuccessSound = () => {
+    playUiTones([
+      { frequency: 659.25, duration: 0.11, offset: 0, type: "sine", gain: 0.08 },
+      { frequency: 830.61, duration: 0.14, offset: 0.1, type: "triangle", gain: 0.1 },
+    ]);
+  };
+
+  const playErrorSound = () => {
+    playUiTones([
+      { frequency: 320, duration: 0.13, offset: 0, type: "sawtooth", gain: 0.06 },
+      { frequency: 220, duration: 0.17, offset: 0.1, type: "sawtooth", gain: 0.07 },
+    ]);
   };
 
   const startQuiz = () => {
@@ -123,6 +212,7 @@ export default function Home() {
     }
 
     if (!currentAnswer) {
+      playErrorSound();
       setFeedback({
         status: "error",
         message: "Escolhe uma opcao para continuar.",
@@ -136,6 +226,7 @@ export default function Home() {
     );
 
     if (!isCorrect) {
+      playErrorSound();
       setFeedback({
         status: "error",
         message:
@@ -148,6 +239,7 @@ export default function Home() {
     const isLastQuestion = currentStep === totalSteps - 1;
 
     if (isLastQuestion) {
+      playSuccessSound();
       setFeedback({
         status: "success",
         message: "Perfeito. Desbloqueando seu convite...",
@@ -156,6 +248,7 @@ export default function Home() {
       return;
     }
 
+    playSuccessSound();
     setFeedback(defaultFeedback);
     setSnackbarVisible(false);
     setCurrentStep((previous) => previous + 1);
