@@ -39,18 +39,39 @@ export function QuestionCard({
       {question.hint ? (
         <p className="mt-3 text-sm leading-6 text-berry-600">{question.hint}</p>
       ) : null}
-      <label className="mt-6 block">
-        <span className="mb-2 block text-sm font-semibold text-berry-700">
-          Sua resposta
-        </span>
-        <input
-          value={answer}
-          onChange={(event) => onAnswerChange(event.target.value)}
-          placeholder={question.placeholder ?? "Digite aqui"}
-          autoComplete="off"
-          className="w-full rounded-2xl border border-rose-200 bg-rose-50/60 px-4 py-3 text-base text-berry-900 outline-none transition focus-visible:border-berry-400 focus-visible:ring-2 focus-visible:ring-berry-200"
-        />
-      </label>
+      <fieldset className="mt-6">
+        <legend className="mb-2 block text-sm font-semibold text-berry-700">
+          Escolha uma opcao
+        </legend>
+        <div className="grid gap-3">
+          {question.options.map((option) => {
+            const isChecked = answer === option.id;
+
+            return (
+              <label
+                key={option.id}
+                className={`flex cursor-pointer items-start gap-3 rounded-2xl border px-4 py-3 transition ${
+                  isChecked
+                    ? "border-berry-500 bg-berry-50"
+                    : "border-rose-200 bg-rose-50/40 hover:border-berry-300"
+                }`}
+              >
+                <input
+                  type="radio"
+                  name={question.id}
+                  value={option.id}
+                  checked={isChecked}
+                  onChange={(event) => onAnswerChange(event.target.value)}
+                  className="mt-1 h-4 w-4 accent-berry-500"
+                />
+                <span className="text-sm leading-6 text-berry-900 sm:text-base">
+                  {option.label}
+                </span>
+              </label>
+            );
+          })}
+        </div>
+      </fieldset>
       {feedback.status !== "idle" ? (
         <p className={`mt-3 text-sm font-medium ${feedbackColor}`}>
           {feedback.message}
