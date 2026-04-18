@@ -29,6 +29,7 @@ const defaultFeedback: Feedback = {
 };
 
 const QUIZ_STORAGE_KEY = "lamis-invite-progress-v1";
+const SNACKBAR_DURATION_MS = 2400;
 
 export default function Home() {
   const [stage, setStage] = useState<FlowStage>("opening");
@@ -149,7 +150,7 @@ export default function Home() {
 
     const timeout = setTimeout(() => {
       setSnackbarVisible(false);
-    }, 1400);
+    }, SNACKBAR_DURATION_MS);
 
     return () => clearTimeout(timeout);
   }, [snackbarVisible]);
