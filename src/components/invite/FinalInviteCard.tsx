@@ -7,7 +7,7 @@ const wppMsg = "Oiee, passando aqui pra confirmar minha presença!!!";
 const LAMIS_WHATSAPP_URL = `https://wa.me/5561982917777?text=${encodeURIComponent(wppMsg)}`;
 const LOCATION_MAPS_URL = "https://maps.app.goo.gl/N9i1jeiYXgv6A9UZ7?g_st=iw";
 const LOCATION_MAPS_EMBED_URL =
-  "https://www.google.com/maps?q=Doma%20Rooftop%20Plano%20Piloto&output=embed";
+  "https://maps.google.com/maps?q=Doma%20Rooftop%20Plano%20Piloto&output=embed";
 
 export function FinalInviteCard({
   onDownloadInvite,
