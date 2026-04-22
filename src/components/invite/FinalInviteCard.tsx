@@ -77,6 +77,9 @@ export function FinalInviteCard({
         <p className="text-sm font-medium leading-6 text-berry-700">
           Para confirmar, fale com a Lamis no WhatsApp.
         </p>
+        <p className="mt-1 text-sm text-berry-700/90">
+          Namorados(as) são super bem-vindos.
+        </p>
         <a
           href={LAMIS_WHATSAPP_URL}
           target="_blank"
