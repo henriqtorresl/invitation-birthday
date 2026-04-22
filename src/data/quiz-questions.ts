@@ -11,7 +11,7 @@ export const quizQuestions: QuizQuestion[] = [
       { id: "vitao", label: "Vitão" },
     ],
     acceptedAnswers: ["selena-gomez"],
-    hint: "Uma diva pop que a Lamis ama.",
+    hint: "Top 1 do spotify wrapped da Lamis.",
     funErrorMessage:
       "Quase! Essa resposta ainda não é a playlist oficial dela.",
   },
@@ -25,7 +25,7 @@ export const quizQuestions: QuizQuestion[] = [
       { id: "taruma", label: "Tarumã" },
     ],
     acceptedAnswers: ["giraffas"],
-    hint: "Dica gastronômica: essa tem lugar especial no coração.",
+    hint: "Dica gastronômica: é bomm!!",
     funErrorMessage:
       "Boa tentativa, mas essa ainda não ganhou o topo da lista.",
   },
@@ -38,7 +38,7 @@ export const quizQuestions: QuizQuestion[] = [
       { id: "lapis-de-olho", label: "Lápis de olho" },
       { id: "gloss", label: "Gloss" },
     ],
-    acceptedAnswers: ["gloss"],
+    acceptedAnswers: ["lapis-de-olho"],
     hint: "Esse item sempre aparece para fechar o look.",
     funErrorMessage:
       "Não foi dessa vez, mas o nécessaire agradece a tentativa.",
