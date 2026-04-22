@@ -12,7 +12,8 @@ export const quizQuestions: QuizQuestion[] = [
     ],
     acceptedAnswers: ["selena-gomez"],
     hint: "Uma diva pop que a Lamis ama.",
-    funErrorMessage: "Quase! Essa resposta ainda não é a playlist oficial dela.",
+    funErrorMessage:
+      "Quase! Essa resposta ainda não é a playlist oficial dela.",
   },
   {
     id: "favorite-parmegiana",
@@ -23,9 +24,10 @@ export const quizQuestions: QuizQuestion[] = [
       { id: "cantucci", label: "Cantucci" },
       { id: "taruma", label: "Tarumã" },
     ],
-    acceptedAnswers: ["cantucci"],
+    acceptedAnswers: ["giraffas"],
     hint: "Dica gastronômica: essa tem lugar especial no coração.",
-    funErrorMessage: "Boa tentativa, mas essa ainda não ganhou o topo da lista.",
+    funErrorMessage:
+      "Boa tentativa, mas essa ainda não ganhou o topo da lista.",
   },
   {
     id: "makeup-item",
@@ -38,45 +40,7 @@ export const quizQuestions: QuizQuestion[] = [
     ],
     acceptedAnswers: ["gloss"],
     hint: "Esse item sempre aparece para fechar o look.",
-    funErrorMessage: "Não foi dessa vez, mas o nécessaire agradece a tentativa.",
-  },
-  {
-    id: "birthday-age",
-    question: "Quantos anos a Lamis está fazendo?",
-    type: "single-choice",
-    options: [
-      { id: "18", label: "18 (com experiência de influencer)" },
-      { id: "23", label: "23, no auge da beleza e do carisma" },
-      { id: "30", label: "30 com energia de festival pop" },
-    ],
-    acceptedAnswers: ["23"],
-    hint: "Spoiler: é a idade mais estilosa da temporada.",
-    funErrorMessage: "Quase! Revisa esse número com carinho.",
-  },
-  {
-    id: "personality",
-    question: "Complete: a Lamis é engraçada e...",
-    type: "single-choice",
-    options: [
-      { id: "estilosa", label: "Estilosa (look impecável sem esforço)" },
-      { id: "quietinha", label: "Quietinha (só que não)" },
-      { id: "sumida", label: "Sumida de festa (essa foi boa)" },
-    ],
-    acceptedAnswers: ["estilosa"],
-    hint: "Vale algo no clima fashion e confiante.",
-    funErrorMessage: "Resposta boa, mas ainda não é a energia da Lamis.",
-  },
-  {
-    id: "dress-code",
-    question: "O mood da festa é:",
-    type: "single-choice",
-    options: [
-      { id: "pijama", label: "Pijama e cobertor (edição soninho)" },
-      { id: "pop-feminino", label: "Pop feminino e elegante" },
-      { id: "esporte", label: "Uniforme de academia e squeeze" },
-    ],
-    acceptedAnswers: ["pop-feminino"],
-    hint: "Pensa em algo jovem, divertido e cheio de personalidade.",
-    funErrorMessage: "Tentativa linda, mas ainda não acertou o mood oficial.",
+    funErrorMessage:
+      "Não foi dessa vez, mas o nécessaire agradece a tentativa.",
   },
 ];
