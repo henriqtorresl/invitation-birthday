@@ -112,9 +112,9 @@ export default function Home() {
   }, [answers, currentStep, hasLoadedPersistedState, stage]);
 
   useEffect(() => {
-    const inviteMusic = new Audio("/audio/invite-theme.ogg");
+    const inviteMusic = new Audio("/audio/Birthday - Selena Gomez.mp3");
     inviteMusic.loop = true;
-    inviteMusic.volume = 0.45;
+    inviteMusic.volume = 0.5;
     inviteMusicRef.current = inviteMusic;
 
     return () => {
