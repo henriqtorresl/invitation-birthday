@@ -12,8 +12,8 @@ export function OpeningScreen({ onStart }: OpeningScreenProps) {
         Um recado especial te espera no final desse mini desafio
       </h1>
       <p className="mt-5 max-w-xl text-base leading-7 text-berry-700 sm:text-lg">
-        Acerte as perguntas sobre a Lamis e desbloqueie um convite
-        feito com carinho, brilho e uma pitada de humor.
+        Acerte as perguntas sobre a Lamis e desbloqueie um convite feito com
+        carinho.
       </p>
       <button
         type="button"
