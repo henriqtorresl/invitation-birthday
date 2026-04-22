@@ -28,7 +28,7 @@ export function FinalInviteCard({
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         <InviteInfo label="Data" value="02/05" />
         <InviteInfo label="Horário" value="17h" />
-        <InviteInfo label="Local" value="Mané - Águas Claras Shopping" />
+        <InviteInfo label="Local" value="Doma Rooftop - Plano Piloto" />
         <InviteInfo label="Confirmar até" value="28/04" />
       </div>
 
