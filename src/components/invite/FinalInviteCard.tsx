@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from "react";
+
 type FinalInviteCardProps = {
   onDownloadInvite: () => void;
   onRestartQuiz: () => void;
@@ -13,6 +15,42 @@ export function FinalInviteCard({
   onDownloadInvite,
   onRestartQuiz,
 }: FinalInviteCardProps) {
+  const mapContainerRef = useRef<HTMLDivElement | null>(null);
+  const [shouldRenderMap, setShouldRenderMap] = useState(false);
+  const [isMapLoaded, setIsMapLoaded] = useState(false);
+
+  useEffect(() => {
+    const container = mapContainerRef.current;
+
+    if (!container) {
+      return;
+    }
+
+    if (typeof IntersectionObserver === "undefined") {
+      const timeout = setTimeout(() => {
+        setShouldRenderMap(true);
+      }, 0);
+
+      return () => clearTimeout(timeout);
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        setShouldRenderMap(true);
+        observer.disconnect();
+      },
+      { rootMargin: "180px 0px" },
+    );
+
+    observer.observe(container);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="w-full overflow-hidden rounded-4xl border border-white/80 bg-gradient-to-br from-white via-rose-50 to-peach-100 p-6 shadow-soft sm:p-10">
       <p className="inline-flex rounded-full bg-white/90 px-4 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-berry-500">
@@ -56,14 +94,33 @@ export function FinalInviteCard({
         <p className="mt-1 text-sm text-berry-700">
           Veja a rota e abra a localização no Google Maps.
         </p>
-        <div className="mt-3 overflow-hidden rounded-2xl border border-rose-200/70 bg-white">
-          <iframe
-            title="Mapa de localização do evento"
-            src={LOCATION_MAPS_EMBED_URL}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className="h-56 w-full"
-          />
+        <div
+          ref={mapContainerRef}
+          className="relative mt-3 h-56 overflow-hidden rounded-2xl border border-rose-200/70 bg-white"
+        >
+          <div
+            className={`pointer-events-none absolute inset-0 bg-gradient-to-br from-rose-100/70 via-white to-peach-100/70 transition-opacity duration-500 ${
+              isMapLoaded ? "opacity-0" : "opacity-100"
+            }`}
+          >
+            <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+            <p className="relative z-10 p-4 text-sm font-medium text-berry-700">
+              Carregando mapa...
+            </p>
+          </div>
+
+          {shouldRenderMap ? (
+            <iframe
+              title="Mapa de localização do evento"
+              src={LOCATION_MAPS_EMBED_URL}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              onLoad={() => setIsMapLoaded(true)}
+              className={`h-full w-full transition-opacity duration-500 ${
+                isMapLoaded ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          ) : null}
         </div>
         <a
           href={LOCATION_MAPS_URL}
