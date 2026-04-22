@@ -61,9 +61,8 @@ export function FinalInviteCard({
         Vem celebrar os meus 23 anos comigo
       </h1>
       <p className="mt-5 max-w-2xl text-base leading-7 text-berry-700 sm:text-lg">
-        Quero você comigo em uma noite leve, divertida e cheia de música pop,
-        risadas e looks incríveis. Sua presença vai deixar tudo ainda mais
-        especial.
+        Quero você comigo em uma noite leve, divertida, cheia de risadas e looks
+        incríveis. Sua presença vai deixar tudo ainda mais especial.
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
