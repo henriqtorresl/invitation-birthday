@@ -6,6 +6,8 @@ type FinalInviteCardProps = {
 const wppMsg = "Oiee, passando aqui pra confirmar minha presença!!!";
 const LAMIS_WHATSAPP_URL = `https://wa.me/5561982917777?text=${encodeURIComponent(wppMsg)}`;
 const LOCATION_MAPS_URL = "https://maps.app.goo.gl/N9i1jeiYXgv6A9UZ7?g_st=iw";
+const LOCATION_MAPS_EMBED_URL =
+  "https://www.google.com/maps?q=Doma%20Rooftop%20Plano%20Piloto&output=embed";
 
 export function FinalInviteCard({
   onDownloadInvite,
@@ -33,23 +35,6 @@ export function FinalInviteCard({
         <InviteInfo label="Confirmar até" value="28/04" />
       </div>
 
-      <article className="mt-4 rounded-2xl border border-rose-200/70 bg-white/80 p-4">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-berry-500">
-          Localização
-        </p>
-        <p className="mt-1 text-sm text-berry-700">
-          Veja a rota e abra a localização no Google Maps.
-        </p>
-        <a
-          href={LOCATION_MAPS_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-3 inline-flex rounded-full border border-berry-300 bg-white px-4 py-2 text-sm font-semibold text-berry-700 transition hover:border-berry-500 hover:text-berry-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-berry-500"
-        >
-          Abrir no Google Maps
-        </a>
-      </article>
-
       <div className="mt-4 rounded-2xl border border-rose-200 bg-white/75 p-4">
         <p className="text-sm font-medium leading-6 text-berry-700">
           Para confirmar, fale com a Lamis no WhatsApp.
@@ -63,6 +48,32 @@ export function FinalInviteCard({
           Confirmar no WhatsApp
         </a>
       </div>
+
+      <article className="mt-4 rounded-2xl border border-rose-200/70 bg-white/80 p-4">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-berry-500">
+          Localização
+        </p>
+        <p className="mt-1 text-sm text-berry-700">
+          Veja a rota e abra a localização no Google Maps.
+        </p>
+        <div className="mt-3 overflow-hidden rounded-2xl border border-rose-200/70 bg-white">
+          <iframe
+            title="Mapa de localização do evento"
+            src={LOCATION_MAPS_EMBED_URL}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="h-56 w-full"
+          />
+        </div>
+        <a
+          href={LOCATION_MAPS_URL}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-3 inline-flex rounded-full border border-berry-300 bg-white px-4 py-2 text-sm font-semibold text-berry-700 transition hover:border-berry-500 hover:text-berry-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-berry-500"
+        >
+          Abrir no Google Maps
+        </a>
+      </article>
 
       <div className="mt-6 flex flex-wrap gap-3">
         <button
