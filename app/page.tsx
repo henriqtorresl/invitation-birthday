@@ -188,7 +188,7 @@ export default function Home() {
 
     const timeout = setTimeout(() => {
       setStage("final");
-    }, 2300);
+    }, 3000);
 
     return () => clearTimeout(timeout);
   }, [stage]);
